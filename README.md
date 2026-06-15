@@ -1,6 +1,11 @@
 # Customer-review-sentiment
 An interactive Web Application built with Streamlit that utilizes Natural Language Processing (NLP) to classify and visualize the emotional tone of social media text.
 
+## 📊 Dataset Source
+**Sentiment140 Dataset**
+**Official Repository Link:**  [Kaggle Sentiment140 Dataset Hub](https://www.kaggle.com/datasets/kazanova/sentiment140).
+
+
 ## Problem Statement
 Social media platforms like Twitter generate millions of unstructured text updates every second. For companies, researchers, and brands, tracking public opinion or customer feedback manually is impossible. 
 
