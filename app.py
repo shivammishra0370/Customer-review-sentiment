@@ -94,7 +94,7 @@ if st.button("Run Sentiment Analysis"):
         details_df = pd.DataFrame({
             "Tweet Snippet String": [user_tweet],
             "Selected Pipeline Engine": [model_choice],
-            "Classification Result Index": [int(prediction)],
+            "Classification Result Index": [int(prediction[0])],
             "Confidence Probability": [f"{confidence_percentage:.2f}%"]
         })
         st.dataframe(details_df, use_container_width=True, hide_index=True)
