@@ -1,5 +1,6 @@
 # Customer-review-sentiment
 An interactive Web Application built with Streamlit that utilizes Natural Language Processing (NLP) to classify and visualize the emotional tone of social media text.
+[![Streamlit App](https://streamlit.io)](https://customer-review-sentiment-0370.streamlit.app/)
 
 ## 📊 Dataset Source
 **Sentiment140 Dataset**
