@@ -12,7 +12,7 @@ def clean_tweet(text):
     text=''.join([char for char in text if char not in string.punctuation])
     return text.lower().strip()
 
-st.set_page_config(page_title="Sentiment Analyzer",page_icon="📝",layout="wide")
+st.set_page_config(page_title="Social Media Sentiment Analyzer",page_icon="📝",layout="wide")
 
 @st.cache_resource
 def load_all_assets():
@@ -46,7 +46,7 @@ st.sidebar.write(
 st.sidebar.markdown("---")
 st.sidebar.caption("Made with Streamlit")
 
-st.title("💬Sentiment Analysis Dashboard")
+st.title("💬Social Media Sentiment Analysis Dashboard")
 st.info(f"**Currently Evaluating Using Engine:** {model_choice}")
 
 user_tweet = st.text_area("Enter Text to Analyze:", placeholder="Type here...")
