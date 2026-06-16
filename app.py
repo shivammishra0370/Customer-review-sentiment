@@ -66,29 +66,43 @@ if st.button("Run Sentiment Analysis"):
         else:
             st.error(f"### 😞 Sentiment Outcome: NEGATIVE  |  Engine Confidence Score: {confidence_percentage:.1f}%")
         
+                # Display Dynamic Charts Grid Layout
         st.markdown("### Metrics Analysis Insights")
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("Overall Sentiment Distribution")
+            st.subheader("Overall Prediction Confidence")
+            pos_pct = float(probabilities[0][1] * 100)
+            neg_pct = float(probabilities[0][0] * 100)
+            
             donut_data = pd.DataFrame({
-                "Sentiment": ["Positive", "Negative", "Neutral"],
-                "Percentage": [65, 25, 10]
+                "Sentiment": ["Positive", "Negative"],
+                "Percentage": [pos_pct, neg_pct]
             })
+            
             fig_donut = px.pie(donut_data, names="Sentiment", values="Percentage", hole=0.5,
-                               color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c", "Neutral": "#95a5a6"})
+                               color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c"})
             fig_donut.update_layout(margin=dict(t=20, b=20, l=20, r=20), height=300)
             st.plotly_chart(fig_donut, use_container_width=True)
 
         with col2:
-            st.subheader("Top Keywords Presence")
-            words_data = pd.DataFrame({
-                "Keywords": ["streamlined", "easy", "python", "nlp", "fast", "excellent", "tweets", "social"],
-                "Frequency": [280, 260, 180, 160, 130, 125, 110, 90]
-            })
-            fig_bar = px.bar(words_data, x="Keywords", y="Frequency", color_discrete_sequence=["#1f77b4"])
-            fig_bar.update_layout(margin=dict(t=20, b=20, l=20, r=20), height=300)
-            st.plotly_chart(fig_bar, use_container_width=True)
+            st.subheader("Words in Your Input")
+            words_in_tweet = cleaned.split()
+            word_counts = {}
+            for word in words_in_tweet:
+                if len(word) > 2:
+                    word_counts[word] = word_counts.get(word, 0) + 1
+            if word_counts:
+                words_data = pd.DataFrame({
+                    "Keywords": list(word_counts.keys()),
+                    "Frequency": list(word_counts.values())
+                }).sort_values(by="Frequency", ascending=False).head(10) # Show top 10 words max
+                
+                fig_bar = px.bar(words_data, x="Keywords", y="Frequency", color_discrete_sequence=["#1f77b4"])
+                fig_bar.update_layout(margin=dict(t=20, b=20, l=20, r=20), height=300)
+                st.plotly_chart(fig_bar, use_container_width=True)
+            else:
+                st.write("Type a longer tweet to visualize key word frequencies.")
 
         st.markdown("### Analysis Details")
         details_df = pd.DataFrame({
